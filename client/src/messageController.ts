@@ -1,8 +1,8 @@
 import {
-  ClientGreetingPayload,
   message,
   MESSAGES,
   newMessage,
+  NewUserJoinedPayload,
   ServerGreetingPayload,
   ServerStatusPayload,
 } from './messages';
@@ -12,6 +12,9 @@ import socket from './socket';
 export const onMessage = (aMessage: string): void => {
   const interpretMessage: message = JSON.parse(aMessage);
   switch (interpretMessage.type) {
+    case MESSAGES.NEW_USER_JOINED:
+      onNewUserJoined(interpretMessage.payload as NewUserJoinedPayload);
+      break;
     case MESSAGES.SERVER_STATUS:
       onServerStatus(interpretMessage.payload as ServerStatusPayload);
       break;
@@ -22,6 +25,10 @@ export const onMessage = (aMessage: string): void => {
       onUnknownMessage();
       break;
   }
+};
+
+export const onNewUserJoined = (payload: NewUserJoinedPayload): void => {
+  console.log(MESSAGES.NEW_USER_JOINED);
 };
 
 export const onServerStatus = (payload: ServerStatusPayload): void => {

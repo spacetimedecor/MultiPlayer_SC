@@ -2,7 +2,8 @@ export type messagePayloadTypes =
   | ServerGreetingPayload
   | ClientGreetingPayload
   | ServerStatusPayload
-  | ClientStatusPayload;
+  | ClientStatusPayload
+  | NewUserJoinedPayload;
 
 export type message = {
   type: MESSAGES;
@@ -14,7 +15,12 @@ export enum MESSAGES {
   CLIENT_STATUS = 'Just checking in with CLIENT status :)',
   SERVER_GREETING = 'Hello from server!',
   CLIENT_GREETING = 'Hello from client!',
+  NEW_USER_JOINED = 'A new user joined, :D OMFG!',
 }
+
+export type NewUserJoinedPayload = {
+  id: string;
+};
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type ServerStatusPayload = {};
